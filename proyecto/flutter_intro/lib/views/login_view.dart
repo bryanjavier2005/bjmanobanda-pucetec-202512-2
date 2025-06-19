@@ -37,11 +37,13 @@ class LoginView extends StatelessWidget {
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
-              onPressed: () {
-                print('${usuariocontroller.text}${contrasenacontroller.text}');
-                login(usuariocontroller.text, contrasenacontroller.text);
+              onPressed: () async {
+                final resp = await login(usuariocontroller.text, contrasenacontroller.text);
+                if (resp){
+                  Navigator.pushNamed(context, '/home');
+                }                
               },
-              child: const Text('Iniciar sesión'),
+              child: const Text('ingresar'),
             ),
           ],
         ),
