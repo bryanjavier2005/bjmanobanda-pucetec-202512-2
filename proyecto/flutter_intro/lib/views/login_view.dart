@@ -12,7 +12,7 @@ class LoginView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login Page'),
+        title: const Text('PAGINA INICIAL LOGIN'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -33,7 +33,7 @@ class LoginView extends StatelessWidget {
 
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor: const Color.fromARGB(255, 1, 63, 39),
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
@@ -43,7 +43,7 @@ class LoginView extends StatelessWidget {
                   Navigator.pushNamed(context, '/home');
                 }                
               },
-              child: const Text('ingresar'),
+              child: const Text('INGRESAR AL HOME'),
             ),
           ],
         ),

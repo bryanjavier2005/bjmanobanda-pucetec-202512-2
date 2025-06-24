@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_intro/views/home_view.dart';
+import 'package:flutter_intro/views/productos_view.dart';
 import 'views/login_view.dart'; 
 
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const LoginView(),
         '/home': (context) => const HomeView(),
+        '/productos': (context) => const ProductosView(),
       },
     );
   }

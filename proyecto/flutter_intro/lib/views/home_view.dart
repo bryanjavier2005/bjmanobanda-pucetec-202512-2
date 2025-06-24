@@ -7,7 +7,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PESTAÑA DE HOME'),
+        title: const Text('Welcome AL HOME!'),
       ),
       body: Center(
         child: Column(
@@ -15,6 +15,11 @@ class HomeView extends StatelessWidget {
           children: [
             const Text('Welcome AL HOME!'),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.teal,
+              foregroundColor: Colors.white,
+
+              ),
               onPressed: (){
               Navigator.pushReplacementNamed(context, '/productos');
             },
