@@ -36,6 +36,7 @@ class ProductosView extends StatelessWidget {
               final p = productos[index];
 
               return Card(
+                color: const Color.fromARGB(255, 1, 174, 255),
                 elevation: 2,
                 margin: const EdgeInsets.symmetric(vertical: 8),
                 child: ListTile(
