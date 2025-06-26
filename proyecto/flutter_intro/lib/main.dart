@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_intro/views/home_view.dart';
 import 'package:flutter_intro/views/productos_view.dart';
@@ -15,14 +16,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter App',
-      initialRoute: '/', 
-      routes: {
-        '/': (context) => const LoginView(),
-        '/home': (context) => const HomeView(),
-        '/productos': (context) => const ProductosView(),
-      },
+    
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: ())
+      ],
+      child: MaterialApp(
+        title: 'Flutter App',
+        initialRoute: '/', 
+        routes: {
+          '/': (context) => const LoginView(),
+          '/home': (context) => const HomeView(),
+          '/productos': (context) => const ProductosView(),
+        },
+      ),
     );
   }
 }                             

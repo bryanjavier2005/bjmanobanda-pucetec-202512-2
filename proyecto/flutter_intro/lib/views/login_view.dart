@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_intro/bloc/login_bloc.dart';
 import 'package:flutter_intro/services/login.service.dart';
 import 'package:flutter_intro/widgets/button_widget.dart';
 
@@ -9,7 +11,8 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController usuariocontroller = TextEditingController();
     final TextEditingController contrasenacontroller = TextEditingController();
-
+    //bloc
+    final loginBloc = context.read<LoginBloc>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('PAGINA INICIAL LOGIN'),
@@ -39,6 +42,7 @@ class LoginView extends StatelessWidget {
               ),
               onPressed: () async {
                 final resp = await login(usuariocontroller.text, contrasenacontroller.text);
+                loginBloc.add(LoginSendEvent());
                 if (resp){
                   Navigator.pushNamed(context, '/home');
                 }                

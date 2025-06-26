@@ -10,6 +10,7 @@ dependencies:
   dev: ^1.0.0
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.1.1
   flutter_dotenv: ^5.2.1
   http: ^1.4.0
 
