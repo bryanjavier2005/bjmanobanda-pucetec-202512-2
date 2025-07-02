@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_intro/bloc/login_bloc.dart';
 import 'package:flutter_intro/views/home_view.dart';
 import 'package:flutter_intro/views/productos_view.dart';
 import 'views/login_view.dart'; 
@@ -19,7 +20,10 @@ class MyApp extends StatelessWidget {
     
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: ())
+        BlocProvider(create: (context) => LoginBloc()),
+        //
+        //
+        //BlocProvider(create: (context)=> ),
       ],
       child: MaterialApp(
         title: 'Flutter App',
