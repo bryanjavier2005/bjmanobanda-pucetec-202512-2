@@ -4,8 +4,8 @@ import 'package:http/http.dart' as http;
 import '../model/products_model.dart';
 
 Future<List<ProductsModel>> getAllProducts() async {
-  final baseUrl = dotenv.env['API_BASE'] ?? 'https://pucei.edu.ec:9118';
-  final url = Uri.parse('$baseUrl/api/v1/products');
+  final baseUrl = dotenv.env['API_BASE'] ?? 'https://pucei.edu.ec:9118/api/v1';
+  final url = Uri.parse('$baseUrl/products');
 
   final response = await http.get(
     url,
