@@ -1,6 +1,5 @@
-// lib/views/crear_view.dart
-
 import 'package:flutter/material.dart';
+import '../services/firestore_service.dart';
 
 class CrearView extends StatelessWidget {
   const CrearView({super.key});
@@ -39,22 +38,48 @@ class CrearView extends StatelessWidget {
             const SizedBox(height: 16),
             TextField(
               controller: horaInicioController,
-              decoration: const InputDecoration(labelText: 'Hora de Inicio'),
+              decoration: const InputDecoration(labelText: 'Hora de Inicio (Ej: 14:00)'),
             ),
             const SizedBox(height: 16),
             TextField(
               controller: horaFinController,
-              decoration: const InputDecoration(labelText: 'Hora de Fin'),
+              decoration: const InputDecoration(labelText: 'Hora de Fin (Ej: 16:30)'),
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: () {
-                // temporal
+              onPressed: () async {
                 final titulo = tituloController.text;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Evento "$titulo" creado (visual)')),
-                );
-                Navigator.pop(context);
+                final descripcion = descripcionController.text;
+                final ubicacion = ubicacionController.text;
+                final horaInicio = horaInicioController.text;
+                final horaFin = horaFinController.text;
+
+                if (titulo.isEmpty || descripcion.isEmpty || ubicacion.isEmpty || horaInicio.isEmpty || horaFin.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Por favor completa todos los campos.')),
+                  );
+                  return;
+                }
+
+                try {
+                  await FirestoreService().agregarEvento(
+                    titulo: titulo,
+                    descripcion: descripcion,
+                    ubicacion: ubicacion,
+                    horaInicio: horaInicio,
+                    horaFin: horaFin,
+                  );
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Evento "$titulo" guardado exitosamente.')),
+                  );
+
+                  Navigator.pop(context);
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Error al guardar el evento.')),
+                  );
+                }
               },
               child: const Text('Guardar Evento'),
             ),

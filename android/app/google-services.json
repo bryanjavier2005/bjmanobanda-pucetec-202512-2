@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1058800222002",
+    "project_id": "appeventos-bryan",
+    "storage_bucket": "appeventos-bryan.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058800222002:android:2c2558b2d280a86deea12b",
+        "android_client_info": {
+          "package_name": "com.example.app_eventos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfhkEIv_hIeS37qUG5rSZu61eFqtkGqRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
