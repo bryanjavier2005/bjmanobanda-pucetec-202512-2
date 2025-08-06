@@ -40,18 +40,39 @@ class ListaView extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 color: Colors.blue[50],
                 child: ExpansionTile(
-                  title: Text(data['titulo'] ?? 'Sin título',
-                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  title: Text(
+                    data['titulo'] ?? 'Sin título',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   subtitle: Text(data['descripcion'] ?? ''),
                   children: [
-                    ListTile(
-                      title: Text('Ubicación: ${data['ubicacion'] ?? 'No especificada'}'),
-                    ),
-                    ListTile(
-                      title: Text('Hora de Inicio: ${data['hora_inicio'] ?? 'N/A'}'),
-                    ),
-                    ListTile(
-                      title: Text('Hora de Fin: ${data['hora_fin'] ?? 'N/A'}'),
+                    if (data['organizador'] != null)
+                      ListTile(title: Text('Organizador: ${data['organizador']}')),
+                    if (data['contacto'] != null)
+                      ListTile(title: Text('Contacto: ${data['contacto']}')),
+                    if (data['ciudad'] != null)
+                      ListTile(title: Text('Ciudad: ${data['ciudad']}')),
+                    if (data['ubicacion'] != null)
+                      ListTile(title: Text('Ubicación Exacta: ${data['ubicacion']}')),
+                    ListTile(title: Text('Hora de Inicio: ${data['hora_inicio']}')),
+                    ListTile(title: Text('Hora de Fin: ${data['hora_fin']}')),
+                    const SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/editar',
+                            arguments: {
+                              'id': evento.id,
+                              'data': data,
+                            },
+                          );
+                        },
+                        icon: const Icon(Icons.edit),
+                        label: const Text('Editar'),
+                      ),
                     ),
                   ],
                 ),

@@ -14,14 +14,20 @@ class FirestoreService {
   Future<void> agregarEvento({
     required String titulo,
     required String descripcion,
-    required String ubicacion,
+    required String organizador,
+    required String contacto,
+    required String ciudad,
+    required String ubicacionExacta,
     required String horaInicio,
     required String horaFin,
   }) async {
     await _db.collection('eventos').add({
       'titulo': titulo,
       'descripcion': descripcion,
-      'ubicacion': ubicacion,
+      'organizador': organizador,
+      'contacto': contacto,
+      'ciudad': ciudad,
+      'ubicacion': ubicacionExacta,
       'hora_inicio': horaInicio,
       'hora_fin': horaFin,
       'creado_en': FieldValue.serverTimestamp(),

@@ -6,43 +6,52 @@ class InicioView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Eventos App')),
+      appBar: AppBar(title: const Text('Bienvenido a AppEventos')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [  
-            Image(
-              image: NetworkImage('https://www.totalisimo.com/wp-content/uploads/2018/06/volkswagen-diana-krall-3.jpg')),
             const Icon(
               Icons.event,
               size: 100,
-              color: Color.fromARGB(255, 247, 4, 0),
+              color: Color.fromARGB(255, 0, 17, 254),
             ),
             const Text(
-              'Bienvenido a la App de Eventos',
-              style: TextStyle(fontSize: 20),
+              '¿Quieres organizar un evento?',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 20),
-            ElevatedButton(
+            const SizedBox(height: 8),
+            const Text(
+              'Crea y publica tu evento en segundos, y llega a más personas fácilmente.',
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.pushNamed(context, '/crear');
+              },
+              icon: Icon(Icons.create_new_folder),
+              label: Text('Crear Evento'),
+            ),
+            const SizedBox(height: 40),
+            const Text(
+              '¿Buscas eventos cerca de ti?',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Explora eventos, encuentra actividades y participa.',
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton.icon(
               onPressed: () {
                 Navigator.pushNamed(context, '/lista');
               },
-              child: const Text('Ver Eventos disponibles'),
-            ),
-            IconButton(
-              onPressed:() {
-                Navigator.pushNamed(context, '/crear');
-              },
-              icon: const Icon(Icons.create_new_folder),
-              iconSize: 50,
-            ),
-
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/crear');
-              },
-              child: const Text('Crear Evento'),
+              icon: Icon(Icons.document_scanner),
+              label: Text('Ver Eventos Disponibles'),
             ),
           ],
         ),
