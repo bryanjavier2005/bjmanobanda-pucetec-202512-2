@@ -71,7 +71,7 @@ class LoginView extends StatelessWidget {
                               ),
                             );
                           },
-                          child: const Text('INGRESAR AL HOME'),
+                          child: const Text ('INGRESAR AL HOME'),
                         ),
                   );
                 },
