@@ -9,6 +9,7 @@ class ListaView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Lista de Eventos'),
+        backgroundColor: const Color.fromARGB(255, 151, 216, 249),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance

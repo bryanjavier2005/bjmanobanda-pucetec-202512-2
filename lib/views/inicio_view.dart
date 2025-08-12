@@ -6,7 +6,8 @@ class InicioView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Bienvenido a AppEventos')),
+      appBar: AppBar(title: const Text('Bienvenido a AppEventos'),backgroundColor: const Color.fromARGB(255, 151, 216, 249), ),
+      backgroundColor: const Color.fromARGB(255, 244, 245, 245),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -33,6 +34,10 @@ class InicioView extends StatelessWidget {
               },
               icon: Icon(Icons.create_new_folder),
               label: Text('Crear Evento'),
+              style: ElevatedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 14, 255, 1),
+              foregroundColor: const Color.fromARGB(255, 20, 0, 241),
+              ),
             ),
             const SizedBox(height: 40),
             const Text(
@@ -52,6 +57,10 @@ class InicioView extends StatelessWidget {
               },
               icon: Icon(Icons.document_scanner),
               label: Text('Ver Eventos Disponibles'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 14, 255, 1),
+                foregroundColor: const Color.fromARGB(255, 9, 1, 255),
+              ),
             ),
           ],
         ),
