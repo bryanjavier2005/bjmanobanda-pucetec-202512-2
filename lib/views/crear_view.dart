@@ -216,24 +216,15 @@ class _CrearViewState extends State<CrearView> {
                     }
                     try {
                       await FirestoreService().agregarEvento(
-                        titulo: tituloController.text,
-                        descripcion: descripcionController.text,
-                        organizador: organizadorController.text,
-                        contacto: contactoController.text,
-                        ciudad: ciudadSeleccionada!,
-                        ubicacionExacta: ubicacionExactaController.text,
-                        fecha: fechaController.text,
-                        horaInicio: horaInicioController.text,
-                        horaFin: horaFinController.text,
+                        titulo: tituloController.text, descripcion: descripcionController.text, organizador: organizadorController.text, contacto: contactoController.text, ciudad: ciudadSeleccionada!,
+                        ubicacionExacta: ubicacionExactaController.text, fecha: fechaController.text, horaInicio: horaInicioController.text, horaFin: horaFinController.text,                                                                                                                                                                
                       );
-
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('Evento "${tituloController.text}" guardado exitosamente!.'),
                           backgroundColor: Colors.green,
                         ),
                       );
-
                       Navigator.pop(context);
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(
