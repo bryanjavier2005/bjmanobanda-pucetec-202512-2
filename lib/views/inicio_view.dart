@@ -6,8 +6,7 @@ class InicioView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Bienvenido a AppEventos'),backgroundColor: const Color.fromARGB(255, 151, 216, 249), ),
-      backgroundColor: const Color.fromARGB(255, 244, 245, 245),
+      appBar: AppBar(title: const Text('Bienvenido a AppEventos'),backgroundColor: const Color.fromARGB(255, 3, 255, 171), ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

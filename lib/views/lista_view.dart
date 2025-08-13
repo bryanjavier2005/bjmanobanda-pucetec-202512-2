@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'editar_view.dart';
 
 class ListaView extends StatelessWidget {
   const ListaView({super.key});
@@ -9,7 +10,7 @@ class ListaView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Lista de Eventos'),
-        backgroundColor: const Color.fromARGB(255, 151, 216, 249),
+        backgroundColor: const Color.fromARGB(255, 3, 255, 171),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -45,7 +46,7 @@ class ListaView extends StatelessWidget {
                     data['titulo'] ?? 'Sin título',
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text(data['descripcion'] ?? ''),
+                  subtitle: Text('${data['ciudad']} - ${data['fecha']} - ${data['horaInicio']}'),
                   children: [
                     if (data['organizador'] != null)
                       ListTile(title: Text('Organizador: ${data['organizador']}')),
@@ -53,22 +54,31 @@ class ListaView extends StatelessWidget {
                       ListTile(title: Text('Contacto: ${data['contacto']}')),
                     if (data['ciudad'] != null)
                       ListTile(title: Text('Ciudad: ${data['ciudad']}')),
-                    if (data['ubicacion'] != null)
-                      ListTile(title: Text('Ubicación Exacta: ${data['ubicacion']}')),
-                    ListTile(title: Text('Hora de Inicio: ${data['hora_inicio']}')),
-                    ListTile(title: Text('Hora de Fin: ${data['hora_fin']}')),
+                    if (data['ubicacionExacta'] != null)
+                      ListTile(title: Text('Ubicación Exacta: ${data['ubicacionExacta']}')),
+                    if (data['fecha'] != null)
+                      ListTile(title: Text('Fecha: ${data['fecha']}')),
+                    if (data['horaInicio'] != null)
+                      ListTile(title: Text('Hora de Inicio: ${data['horaInicio']}')),
+                    if (data['horaFin'] != null)
+                      ListTile(title: Text('Hora de Fin: ${data['horaFin']}')),
                     const SizedBox(height: 8),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 12),
                       child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(255, 12, 34, 202),
+                          foregroundColor: Colors.white,
+                        ),
                         onPressed: () {
-                          Navigator.pushNamed(
+                          Navigator.push(
                             context,
-                            '/editar',
-                            arguments: {
-                              'id': evento.id,
-                              'data': data,
-                            },
+                            MaterialPageRoute(
+                              builder: (_) => EditarView(
+                                id: evento.id,
+                                data: data,
+                              ),
+                            ),
                           );
                         },
                         icon: const Icon(Icons.edit),

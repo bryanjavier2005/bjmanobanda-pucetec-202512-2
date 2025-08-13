@@ -1,4 +1,4 @@
-import 'package:app_eventos/views/editar_view.dart';
+//import 'package:app_eventos/views/editar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'views/inicio_view.dart';
@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
         '/': (context) => const InicioView(),
         '/lista': (context) => const ListaView(),
         '/crear': (context) => const CrearView(),
-        '/editar': (context) => const EditarView(),
       },
     );
   }
