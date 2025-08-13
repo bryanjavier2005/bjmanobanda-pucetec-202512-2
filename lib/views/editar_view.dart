@@ -94,7 +94,7 @@ class _EditarViewState extends State<EditarView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Editar Evento'),
-        backgroundColor: const Color.fromARGB(255, 7, 246, 246),
+        backgroundColor: const Color.fromARGB(255, 0, 255, 170),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -110,30 +110,57 @@ class _EditarViewState extends State<EditarView> {
                 ),
               ),
               const SizedBox(height: 20),
-              TextField(controller: tituloController, decoration: const InputDecoration(labelText: 'Título del Evento')),
+              TextField(
+                  controller: tituloController,
+                  decoration:
+                      const InputDecoration(labelText: 'Título del Evento')),
               const SizedBox(height: 16),
-              TextField(controller: descripcionController, decoration: const InputDecoration(labelText: 'Descripción'), maxLines: 2),
+              TextField(
+                  controller: descripcionController,
+                  decoration:
+                      const InputDecoration(labelText: 'Descripción'),
+                  maxLines: 2),
               const SizedBox(height: 16),
-              TextField(controller: organizadorController, decoration: const InputDecoration(labelText: 'Nombre del Organizador')),
+              TextField(
+                  controller: organizadorController,
+                  decoration: const InputDecoration(
+                      labelText: 'Nombre del Organizador')),
               const SizedBox(height: 16),
-              TextField(controller: contactoController, decoration: const InputDecoration(labelText: 'Contacto (Teléfono)'), keyboardType: TextInputType.phone),
+              TextField(
+                  controller: contactoController,
+                  decoration: const InputDecoration(
+                      labelText: 'Contacto (Teléfono)'),
+                  keyboardType: TextInputType.phone),
               const SizedBox(height: 24),
-              const Text('Ubicación del Evento', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+              const Text(
+                'Ubicación del Evento',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Color.fromARGB(255, 0, 0, 0)),
+              ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
                 value: ciudadSeleccionada,
-                items: ciudades.map((ciudad) {
-                  return DropdownMenuItem(value: ciudad, child: Text(ciudad));
-                }).toList(),
+                decoration: const InputDecoration(labelText: 'Ciudad'),
+                items: ciudades
+                    .map((ciudad) => DropdownMenuItem(
+                          value: ciudad,
+                          child: Text(ciudad),
+                        ))
+                    .toList(),
                 onChanged: (value) {
                   setState(() {
                     ciudadSeleccionada = value;
                   });
                 },
-                decoration: const InputDecoration(labelText: 'Ciudad'),
               ),
               const SizedBox(height: 16),
-              TextField(controller: ubicacionExactaController, decoration: const InputDecoration(labelText: 'Ubicación Exacta')),
+              TextField(
+                  controller: ubicacionExactaController,
+                  decoration: const InputDecoration(
+                      labelText:
+                          'Ubicación Exacta (calle principal y secundaria/ o referencias)')),
               const SizedBox(height: 24),
               TextField(
                 controller: fechaController,
@@ -165,53 +192,65 @@ class _EditarViewState extends State<EditarView> {
                 onTap: () => _pickTime(inicio: false),
               ),
               const SizedBox(height: 30),
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      icon: const Icon(Icons.save),
-                      label: const Text('Guardar Cambios'),
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        backgroundColor: Colors.green,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      ),
-                      onPressed: () async {
-                        await FirestoreService().actualizarEvento(
-                          id: widget.id,
-                          titulo: tituloController.text,
-                          descripcion: descripcionController.text,
-                          organizador: organizadorController.text,
-                          contacto: contactoController.text,
-                          ciudad: ciudadSeleccionada ?? '',
-                          ubicacionExacta: ubicacionExactaController.text,
-                          fecha: fechaController.text,
-                          horaInicio: horaInicioController.text,
-                          horaFin: horaFinController.text,
-                        );
-                        Navigator.pop(context);
-                      },
-                    ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.save),
+                  label: const Text('Actualizar Evento'),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: const Color.fromARGB(255, 0, 255, 68),
+                    foregroundColor:
+                        const Color.fromARGB(255, 20, 0, 241),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    textStyle: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      icon: const Icon(Icons.delete),
-                      label: const Text('Eliminar'),
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        backgroundColor: Colors.red,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      ),
-                      onPressed: () async {
-                        await FirestoreService().eliminarEvento(widget.id);
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                ],
+                  onPressed: () async {
+                    if (tituloController.text.isEmpty || descripcionController.text.isEmpty || organizadorController.text.isEmpty || contactoController.text.isEmpty ||
+                        ciudadSeleccionada == null || ubicacionExactaController.text.isEmpty || fechaController.text.isEmpty || horaInicioController.text.isEmpty ||                                                                 
+                        horaFinController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text(
+                                'Por favor completa todos los campos.'),
+                            backgroundColor: Colors.red),
+                      );
+                      return;
+                    }
+                    try {
+                      await FirestoreService().actualizarEvento(
+                        id: widget.id,
+                        titulo: tituloController.text,
+                        descripcion: descripcionController.text,
+                        organizador: organizadorController.text,
+                        contacto: contactoController.text,
+                        ciudad: ciudadSeleccionada!,
+                        ubicacionExacta: ubicacionExactaController.text,
+                        fecha: fechaController.text,
+                        horaInicio: horaInicioController.text,
+                        horaFin: horaFinController.text,
+                      );
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Evento "${tituloController.text}" actualizado exitosamente!.'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+
+                      Navigator.pop(context);
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Error al actualizar el evento.'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
+                  },
+                ),
               ),
             ],
           ),

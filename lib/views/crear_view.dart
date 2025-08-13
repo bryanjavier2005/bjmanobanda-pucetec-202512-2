@@ -135,8 +135,6 @@ class _CrearViewState extends State<CrearView> {
                     color: Color.fromARGB(255, 0, 0, 0)),
               ),
               const SizedBox(height: 12),
-
-              // Menú desplegable para ciudades
               DropdownButtonFormField<String>(
                 value: ciudadSeleccionada,
                 decoration: const InputDecoration(labelText: 'Ciudad'),
@@ -153,12 +151,11 @@ class _CrearViewState extends State<CrearView> {
                 },
               ),
               const SizedBox(height: 16),
-
               TextField(
                   controller: ubicacionExactaController,
                   decoration: const InputDecoration(
                       labelText:
-                          'Ubicación Exacta (calle principal y secundaria)')),
+                          'Ubicación Exacta (calle principal y secundaria/ o referencias)')),
               const SizedBox(height: 24),
               TextField(
                 controller: fechaController,
@@ -206,14 +203,8 @@ class _CrearViewState extends State<CrearView> {
                         fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   onPressed: () async {
-                    if (tituloController.text.isEmpty ||
-                        descripcionController.text.isEmpty ||
-                        organizadorController.text.isEmpty ||
-                        contactoController.text.isEmpty ||
-                        ciudadSeleccionada == null ||
-                        ubicacionExactaController.text.isEmpty ||
-                        fechaController.text.isEmpty ||
-                        horaInicioController.text.isEmpty ||
+                    if (tituloController.text.isEmpty || descripcionController.text.isEmpty || organizadorController.text.isEmpty || contactoController.text.isEmpty ||
+                        ciudadSeleccionada == null || ubicacionExactaController.text.isEmpty || fechaController.text.isEmpty || horaInicioController.text.isEmpty ||                                                                 
                         horaFinController.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -223,18 +214,35 @@ class _CrearViewState extends State<CrearView> {
                       );
                       return;
                     }
-                    await FirestoreService().agregarEvento(
-                      titulo: tituloController.text,
-                      descripcion: descripcionController.text,
-                      organizador: organizadorController.text,
-                      contacto: contactoController.text,
-                      ciudad: ciudadSeleccionada!,
-                      ubicacionExacta: ubicacionExactaController.text,
-                      fecha: fechaController.text,
-                      horaInicio: horaInicioController.text,
-                      horaFin: horaFinController.text,
-                    );
-                    Navigator.pop(context);
+                    try {
+                      await FirestoreService().agregarEvento(
+                        titulo: tituloController.text,
+                        descripcion: descripcionController.text,
+                        organizador: organizadorController.text,
+                        contacto: contactoController.text,
+                        ciudad: ciudadSeleccionada!,
+                        ubicacionExacta: ubicacionExactaController.text,
+                        fecha: fechaController.text,
+                        horaInicio: horaInicioController.text,
+                        horaFin: horaFinController.text,
+                      );
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Evento "${tituloController.text}" guardado exitosamente!.'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+
+                      Navigator.pop(context);
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Error al guardar el evento.'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
                   },
                 ),
               ),
